@@ -1,13 +1,17 @@
-import Login from './Login.jsx';
-
+//import Login from './Login.jsx';
+import AuthForm from './AuthForm';
 
 
 function App() {
   return(
     
     <>
+
+    <div>
+    <AuthForm/>
+    </div>
+
     
-    <Login/>
     </>
   );
 }
