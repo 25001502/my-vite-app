@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set } from "firebase/database";
 import { getAuth } from 'firebase/auth';
-
+import { getFirestore } from 'firebase/firestore';
 
 // Paste your Firebase config here:
 const firebaseConfig = {
@@ -16,6 +16,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const db = getFirestore(app);
 
 export { database, ref, set };
 export const auth = getAuth(app);
+export default db;

@@ -3,27 +3,35 @@ import { auth } from './firebase';
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    updateProfile,
 } from 'firebase/auth';
 
 export default function AuthForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
     const [isLogin, setIsLogin] = useState(true);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!isLogin && !username.trim()) {
+            alert('Please enter a username.');
+            return;
+        }
         try {
             if (isLogin) {
                 await signInWithEmailAndPassword(auth, email, password);
                 alert('Logged in!');
             } else {
-                await createUserWithEmailAndPassword(auth, email, password);
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                await updateProfile(userCredential.user, { displayName: username });
                 alert('Account created!');
             }
         } catch (error) {
             alert(error.message);
         }
     };
+
     return (
         <div
             style={{
@@ -36,7 +44,6 @@ export default function AuthForm() {
                 padding: '1rem',
             }}
         >
-            {/* Univen Logo */}
             <img
                 src="https://www.univen.ac.za/docs/univen-logo.png"
                 alt="University of Venda Logo"
@@ -91,6 +98,27 @@ export default function AuthForm() {
                     {isLogin ? 'Login' : 'Create Account'}
                 </h2>
                 <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        style={{
+                            width: '100%',
+                            padding: '0.7rem',
+                            marginBottom: '0.8rem',
+                            border: '1px solid #ccc',
+                            borderRadius: 6,
+                            fontSize: 15,
+                            outline: 'none',
+                            transition: 'border 0.2s',
+                            boxSizing: 'border-box',
+                            display: isLogin ? 'none' : 'block',
+                        }}
+                        autoComplete="username"
+                        disabled={isLogin}
+                        required={!isLogin}
+                    />
                     <input
                         type="email"
                         placeholder="Email"
@@ -165,7 +193,6 @@ export default function AuthForm() {
                     {isLogin ? 'Need an account? Sign up' : 'Already have an account? Log in'}
                 </button>
             </div>
-            {/* Responsive meta tag for mobile */}
             <style>{`
                 @media (max-width: 480px) {
                     div[style*="min-height"] {
