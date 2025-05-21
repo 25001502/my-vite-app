@@ -1,19 +1,16 @@
-//import Login from './Login.jsx';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AuthForm from './AuthForm';
-
+import Welcome from './pages/Welcome';
 
 function App() {
-  return(
-    
-    <>
-
-    <div>
-    <AuthForm/>
-    </div>
-
-    
-    </>
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<AuthForm />} />
+        <Route path="/welcome" element={<Welcome />} />
+      </Routes>
+    </Router>
   );
 }
 
-export default App
+export default App;

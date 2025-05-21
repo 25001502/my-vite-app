@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { auth } from './firebase';
+import { useNavigate } from 'react-router-dom';
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -12,7 +13,10 @@ export default function AuthForm() {
     const [username, setUsername] = useState('');
     const [isLogin, setIsLogin] = useState(true);
 
-    const handleSubmit = async (e) => {
+
+    const navigate = useNavigate(); 
+
+      const handleSubmit = async (e) => {
         e.preventDefault();
         if (!isLogin && !username.trim()) {
             alert('Please enter a username.');
@@ -21,12 +25,11 @@ export default function AuthForm() {
         try {
             if (isLogin) {
                 await signInWithEmailAndPassword(auth, email, password);
-                alert('Logged in!');
             } else {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 await updateProfile(userCredential.user, { displayName: username });
-                alert('Account created!');
             }
+            navigate('/welcome'); // ✅ redirect after login/signup
         } catch (error) {
             alert(error.message);
         }
@@ -209,4 +212,4 @@ export default function AuthForm() {
             `}</style>
         </div>
     );
-}
+}       
