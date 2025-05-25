@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 const universitySuggestions = [
   "University of Cape Town",
   "University of the Witwatersrand",
