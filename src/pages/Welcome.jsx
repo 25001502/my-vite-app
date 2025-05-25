@@ -1,8 +1,9 @@
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Welcome() {
   const { user } = useAuth();
-
+   const navigate = useNavigate();
   // Animated background rockets and balloons
   return (
     <div
@@ -141,8 +142,28 @@ export default function Welcome() {
           You have successfully logged in.
         </p>
         <p style={{ fontSize: '1rem', opacity: 0.85 }}>
-          We allow you to apply in your desired University.
+          We now allow you to apply in your desired University.
         </p>
+
+          <button
+        onClick={() => navigate('/Aplication')}
+        style={{
+          marginTop: '2rem',
+          padding: '0.8rem 2.2rem',
+          background: '#fff',
+          color: '#764ba2',
+          border: 'none',
+          borderRadius: '8px',
+          fontWeight: 700,
+          fontSize: '1.1rem',
+          cursor: 'pointer',
+          boxShadow: '0 2px 8px rgba(31,38,135,0.10)',
+          transition: 'background 0.2s, color 0.2s',
+        }}
+      >
+        Continue your journey
+      </button>
+
       </div>
     </div>
   );
