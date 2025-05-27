@@ -139,7 +139,7 @@ export default function Application() {
         {/* Header */}
         <h2 style={{
           textAlign: 'center',
-          color: '#2d3a4a',
+          color: '#4f8cff',
           fontWeight: 700,
           fontSize: '2rem',
           marginBottom: '0.5rem',
