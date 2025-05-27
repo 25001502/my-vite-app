@@ -7,9 +7,9 @@ import { getFirestore } from 'firebase/firestore';
 // Paste your Firebase config here:
 const firebaseConfig = {
   apiKey: "AIzaSyDld0y3sKb1e0WkNvWqe2NIsKZSpNUHOW0",
-  authDomain: "http://my-univen-project.firebaseapp.com",
+  authDomain: "my-univen-project.firebaseapp.com",
   projectId: "my-univen-project",
-  storageBucket: "http://my-univen-project.firebasestorage.app",
+  storageBucket: "my-univen-project.firebasestorage.app",
   messagingSenderId: "786720293448",
   appId: "1:786720293448:web:7a775703cbead240f58e7d"
 };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-
+import db from '../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const universitySuggestions = [
   "University of Cape Town",
@@ -35,10 +36,26 @@ const degreeSuggestions = [
 export default function Application() {
   const [university, setUniversity] = useState('');
   const [degree, setDegree] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`University: ${university}\nDegree: ${degree}`);
+    setLoading(true);
+    setSuccess(false);
+    try {
+      await addDoc(collection(db, "userApplications"), {
+        university,
+        degree,
+        createdAt: serverTimestamp(),
+      });
+      setSuccess(true);
+      setUniversity('');
+      setDegree('');
+    } catch (err) {
+      alert("Error submitting application: " + err.message);
+    }
+    setLoading(false);
   };
 
   return (
@@ -82,8 +99,15 @@ export default function Application() {
             </datalist>
           </label>
         </div>
-        <button type="submit">Submit Application</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Submitting..." : "Submit Application"}
+        </button>
       </form>
+      {success && (
+        <div style={{ color: 'green', marginTop: '1rem' }}>
+          Application submitted successfully!
+        </div>
+      )}
     </div>
   );
 }
