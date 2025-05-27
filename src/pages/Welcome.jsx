@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Welcome() {
   const { user } = useAuth();
-   const navigate = useNavigate();
-  // Animated background rockets and balloons
+  const navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -18,6 +18,7 @@ export default function Welcome() {
         fontFamily: 'Segoe UI, sans-serif',
         position: 'relative',
         overflow: 'hidden',
+        padding: 0,
       }}
     >
       <style>
@@ -34,6 +35,11 @@ export default function Welcome() {
           }
           .welcome-animate {
             animation: fadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
           }
           .emoji-bounce {
             display: inline-block;
@@ -43,7 +49,10 @@ export default function Welcome() {
             0% { transform: translateY(0);}
             100% { transform: translateY(-18px);}
           }
-          /* Animated rockets */
+          .rocket, .balloon {
+            user-select: none;
+            pointer-events: none;
+          }
           .rocket {
             position: absolute;
             font-size: 2.2rem;
@@ -77,7 +86,6 @@ export default function Welcome() {
               opacity: 0;
             }
           }
-          /* Animated balloons */
           .balloon {
             position: absolute;
             font-size: 2.5rem;
@@ -111,6 +119,29 @@ export default function Welcome() {
               opacity: 0;
             }
           }
+          /* Responsive styles */
+          @media (max-width: 600px) {
+            .welcome-animate {
+              padding: 1.5rem 0.8rem !important;
+              width: 95vw !important;
+              min-width: 0 !important;
+              max-width: 99vw !important;
+            }
+            .rocket, .rocket2, .rocket3, .balloon, .balloon2, .balloon3 {
+              font-size: 1.3rem !important;
+            }
+            h1 {
+              font-size: 1.4rem !important;
+            }
+            p {
+              font-size: 1rem !important;
+            }
+            button {
+              width: 100%;
+              font-size: 1rem !important;
+              padding: 0.7rem 0 !important;
+            }
+          }
         `}
       </style>
       {/* Animated Rockets */}
@@ -132,38 +163,47 @@ export default function Welcome() {
           textAlign: 'center',
           position: 'relative',
           zIndex: 1,
+          width: '400px',
+          maxWidth: '95vw',
+          minWidth: '0',
+          margin: '0 auto',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', letterSpacing: '1px' }}>
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', letterSpacing: '1px', textAlign: 'center' }}>
           <span className="emoji-bounce" role="img" aria-label="party">🎉</span>
           &nbsp;Welcome, {user?.displayName || user?.email || 'Guest'}!
         </h1>
-        <p style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>
+        <p style={{ fontSize: '1.2rem', marginBottom: '0.5rem', textAlign: 'center' }}>
           You have successfully logged in.
         </p>
-        <p style={{ fontSize: '1rem', opacity: 0.85 }}>
+        <p style={{ fontSize: '1rem', opacity: 0.85, textAlign: 'center' }}>
           We now allow you to apply in your desired University.
         </p>
-
-          <button
-        onClick={() => navigate('/Aplication')}
-        style={{
-          marginTop: '2rem',
-          padding: '0.8rem 2.2rem',
-          background: '#fff',
-          color: '#764ba2',
-          border: 'none',
-          borderRadius: '8px',
-          fontWeight: 700,
-          fontSize: '1.1rem',
-          cursor: 'pointer',
-          boxShadow: '0 2px 8px rgba(31,38,135,0.10)',
-          transition: 'background 0.2s, color 0.2s',
-        }}
-      >
-        Continue your journey
-      </button>
-
+        <button
+          onClick={() => navigate('/Aplication')}
+          style={{
+            marginTop: '2rem',
+            padding: '0.8rem 2.2rem',
+            background: '#fff',
+            color: '#764ba2',
+            border: 'none',
+            borderRadius: '8px',
+            fontWeight: 700,
+            fontSize: '1.1rem',
+            cursor: 'pointer',
+            boxShadow: '0 2px 8px rgba(31,38,135,0.10)',
+            transition: 'background 0.2s, color 0.2s',
+            width: '100%',
+            maxWidth: '320px',
+            alignSelf: 'center',
+          }}
+        >
+          Continue your journey
+        </button>
       </div>
     </div>
   );
