@@ -36,6 +36,10 @@ const degreeSuggestions = [
 export default function Application() {
   const [university, setUniversity] = useState('');
   const [degree, setDegree] = useState('');
+  const [names, setNames] = useState('');
+  const [surnames, setSurnames] = useState('');
+  const [school, setSchool] = useState('');
+  const [address, setAddress] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -45,11 +49,19 @@ export default function Application() {
     setSuccess(false);
     try {
       await addDoc(collection(db, "userApplications"), {
+        names,
+        surnames,
+        school,
+        address,
         university,
         degree,
         createdAt: serverTimestamp(),
       });
       setSuccess(true);
+      setNames('');
+      setSurnames('');
+      setSchool('');
+      setAddress('');
       setUniversity('');
       setDegree('');
     } catch (err) {
@@ -63,6 +75,54 @@ export default function Application() {
       <h2>Application Page</h2>
       <p>Start your university application here!</p>
       <form onSubmit={handleSubmit} style={{ display: 'inline-block', textAlign: 'left', marginTop: '2rem' }}>
+        <div style={{ marginBottom: '1rem' }}>
+          <label>
+            Names:
+            <input
+              type="text"
+              value={names}
+              onChange={(e) => setNames(e.target.value)}
+              style={{ marginLeft: '1rem' }}
+              required
+            />
+          </label>
+        </div>
+        <div style={{ marginBottom: '1rem' }}>
+          <label>
+            Surnames:
+            <input
+              type="text"
+              value={surnames}
+              onChange={(e) => setSurnames(e.target.value)}
+              style={{ marginLeft: '1rem' }}
+              required
+            />
+          </label>
+        </div>
+        <div style={{ marginBottom: '1rem' }}>
+          <label>
+            Current High School Name:
+            <input
+              type="text"
+              value={school}
+              onChange={(e) => setSchool(e.target.value)}
+              style={{ marginLeft: '1rem' }}
+              required
+            />
+          </label>
+        </div>
+        <div style={{ marginBottom: '1rem' }}>
+          <label>
+            School Address:
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              style={{ marginLeft: '1rem' }}
+              required
+            />
+          </label>
+        </div>
         <div style={{ marginBottom: '1rem' }}>
           <label>
             University of Choice:
