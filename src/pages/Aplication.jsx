@@ -74,6 +74,10 @@ export default function Application() {
     <div style={{ padding: '2rem', textAlign: 'center' }}>
       <h2>Application Page</h2>
       <p>Start your university application here!</p>
+
+      {/* Inform users to send documents via email */}
+    
+
       <form onSubmit={handleSubmit} style={{ display: 'inline-block', textAlign: 'left', marginTop: '2rem' }}>
         <div style={{ marginBottom: '1rem' }}>
           <label>
@@ -168,6 +172,18 @@ export default function Application() {
           Application submitted successfully!
         </div>
       )}
+
+        <div style={{ background: '#f9f9f9', border: '1px solid #ddd', padding: '1rem', margin: '1.5rem auto', maxWidth: 500, borderRadius: 8 }}>
+        <strong>Important:</strong>
+        <p>
+          Please send all required supporting documents (such as your ID, academic transcripts, and proof of residence) to our email address:{" "}
+          <a href="mailto:thandululo99@gmail.com">applications@gmail.com</a>
+        </p>
+        <p>
+          Your application will only be processed once we have received these documents.
+        </p>
+      </div>
+
     </div>
   );
 }

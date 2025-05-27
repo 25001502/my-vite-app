@@ -48,8 +48,8 @@ export default function AuthForm() {
             }}
         >
             <img
-                src="https://www.univen.ac.za/docs/univen-logo.png"
-                alt="University of Venda Logo"
+                src="https://png.pngtree.com/png-clipart/20240921/original/pngtree-a-beautiful-logo-for-letter-n-png-image_16054834.png"
+                alt="Nengovhela Logo"
                 style={{
                     width: 64,
                     height: 64,
@@ -74,7 +74,7 @@ export default function AuthForm() {
                     lineHeight: 1.2,
                 }}
             >
-                University of Venda Application Assistance
+                Nengovhela Application Assistance
             </h1>
             <div
                 style={{
