@@ -48,6 +48,7 @@ export default function AuthForm() {
             }}
         >
             <img
+                className="bounce-in"
                 src="https://png.pngtree.com/png-clipart/20240921/original/pngtree-a-beautiful-logo-for-letter-n-png-image_16054834.png"
                 alt="Nengovhela Logo"
                 style={{
@@ -59,6 +60,7 @@ export default function AuthForm() {
                     boxShadow: '0 2px 8px rgba(25, 118, 210, 0.10)',
                     background: '#fff',
                     padding: 6,
+                    Animation: '',
                 }}
             />
             <h1
@@ -72,6 +74,7 @@ export default function AuthForm() {
                     fontFamily: 'Segoe UI, sans-serif',
                     textShadow: '0 2px 8px rgba(25, 118, 210, 0.08)',
                     lineHeight: 1.2,
+                    
                 }}
             >
                 Nengovhela Application Assistance
@@ -173,6 +176,7 @@ export default function AuthForm() {
                             marginBottom: '0.8rem',
                             boxShadow: '0 2px 8px rgba(25, 118, 210, 0.08)',
                             transition: 'background 0.2s',
+                            
                         }}
                     >
                         {isLogin ? 'Login' : 'Sign Up'}
@@ -197,6 +201,20 @@ export default function AuthForm() {
                 </button>
             </div>
             <style>{`
+                @keyframes bounceIn {
+                  0% { transform: scale(0.8); opacity: 0.7; }
+                  60% { transform: scale(1.05); opacity: 1; }
+                  80% { transform: scale(0.97); }
+                  100% { transform: scale(1); }
+                }
+                .bounce-in {
+                  animation: bounceIn 1.2s infinite alternate;
+                }
+                button[type="submit"]:hover {
+                  background: #1256a0;
+                  transform: scale(1.04);
+                  transition: background 0.2s, transform 0.2s;
+                }
                 @media (max-width: 480px) {
                     div[style*="min-height"] {
                         padding: 0.5rem !important;
@@ -209,7 +227,8 @@ export default function AuthForm() {
                         max-width: 98vw !important;
                     }
                 }
-            `}</style>
+            `
+            }</style>
         </div>
     );
 }       
